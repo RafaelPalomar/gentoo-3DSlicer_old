@@ -1,0 +1,28 @@
+From 5535cad89029839952421346ffb936e67f440086 Mon Sep 17 00:00:00 2001
+From: Rafael Palomar <rafael.palomar@rr-research.no>
+Date: Tue, 27 Feb 2018 09:14:41 +0100
+Subject: [PATCH] ENH: Change CMAKE_MODULE_PATH -- FindPythonQt.cmake
+
+---
+ CMakeLists.txt | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 7b8cae4b6..b40f608e6 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -58,8 +58,9 @@ project(Slicer VERSION "${Slicer_VERSION_MAJOR}.${Slicer_VERSION_MINOR}.${Slicer
+ #------------------------------------------------------------------------------
+ set(CMAKE_MODULE_PATH
+   ${Slicer_SOURCE_DIR}/Extensions/CMake
+-  ${CMAKE_MODULE_PATH}
+-  )
++  ${Slicer_SOURCE_DIR}/Utilities/CMake #FindPythonQt.cmake
++  ${CMAKE_MODULE_PATH}		       
++)
+ 
+ set(Slicer_CMAKE_DIR ${Slicer_SOURCE_DIR}/CMake)
+ set(Slicer_EXTENSIONS_CMAKE_DIR ${Slicer_SOURCE_DIR}/Extensions/CMake)
+-- 
+2.16.1
+

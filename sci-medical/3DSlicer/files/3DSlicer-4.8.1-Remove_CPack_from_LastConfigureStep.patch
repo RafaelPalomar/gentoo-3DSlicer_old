@@ -1,0 +1,22 @@
+From d2f8cb32244b158702c36484579609baf7b23ae9 Mon Sep 17 00:00:00 2001
+From: Rafael Palomar <rafael.palomar@rr-research.no>
+Date: Mon, 23 Apr 2018 16:18:56 +0200
+Subject: [PATCH] Remove CPack in LastConfigureStep
+
+---
+ CMake/LastConfigureStep/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMake/LastConfigureStep/CMakeLists.txt b/CMake/LastConfigureStep/CMakeLists.txt
+index 072b9fb24..391658315 100644
+--- a/CMake/LastConfigureStep/CMakeLists.txt
++++ b/CMake/LastConfigureStep/CMakeLists.txt
+@@ -41,4 +41,4 @@ include(${Slicer_SOURCE_DIR}/CMake/SlicerGenerateSlicerConfig.cmake)
+ include(SlicerPackageAndUploadTarget)
+ 
+ #-----------------------------------------------------------------------------
+-include(${Slicer_SOURCE_DIR}/CMake/SlicerCPack.cmake)
++#include(${Slicer_SOURCE_DIR}/CMake/SlicerCPack.cmake)
+-- 
+2.16.1
+

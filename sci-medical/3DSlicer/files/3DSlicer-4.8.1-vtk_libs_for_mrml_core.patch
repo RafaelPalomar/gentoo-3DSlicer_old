@@ -1,0 +1,27 @@
+From d11f2832ad6a19666b0ee96bdab08bb2fc1cc1f2 Mon Sep 17 00:00:00 2001
+From: Rafael Palomar <rafael.palomar@rr-research.no>
+Date: Wed, 14 Mar 2018 12:13:34 +0100
+Subject: [PATCH] Include vtk for MRLM/Core
+
+---
+ Libs/MRML/Core/CMakeLists.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Libs/MRML/Core/CMakeLists.txt b/Libs/MRML/Core/CMakeLists.txt
+index 2b6a6f1a3..1bb8752a7 100644
+--- a/Libs/MRML/Core/CMakeLists.txt
++++ b/Libs/MRML/Core/CMakeLists.txt
+@@ -32,8 +32,8 @@ mark_as_advanced(MRML_USE_vtkTeem)
+ #
+ # VTK
+ #
+-#find_package(VTK REQUIRED)
+-#include(${VTK_USE_FILE})
++find_package(VTK REQUIRED)
++include(${VTK_USE_FILE})
+ 
+ #
+ # ITK
+-- 
+2.16.1
+

@@ -1,0 +1,24 @@
+From 60562b076f05d873744870fb908bf12d02c557aa Mon Sep 17 00:00:00 2001
+From: Rafael Palomar <rafael.palomar@rr-research.no>
+Date: Mon, 19 Mar 2018 10:01:38 +0100
+Subject: [PATCH] Add PythonQT include dir to SlicerMacroBuildLoadableModule
+
+---
+ CMake/SlicerMacroBuildLoadableModule.cmake | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/CMake/SlicerMacroBuildLoadableModule.cmake b/CMake/SlicerMacroBuildLoadableModule.cmake
+index 44230bbb9..8c56e8d63 100644
+--- a/CMake/SlicerMacroBuildLoadableModule.cmake
++++ b/CMake/SlicerMacroBuildLoadableModule.cmake
+@@ -101,6 +101,7 @@ macro(slicerMacroBuildLoadableModule)
+     ${Slicer_ModuleLogic_INCLUDE_DIRS}
+     ${Slicer_ModuleMRML_INCLUDE_DIRS}
+     ${LOADABLEMODULE_INCLUDE_DIRECTORIES}
++    ${PYTHONQT_INCLUDE_DIR}
+     )
+ 
+   #-----------------------------------------------------------------------------
+-- 
+2.16.1
+

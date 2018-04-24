@@ -1,0 +1,29 @@
+From 359a5de163b95b095f5fdf27d24c8786f76a63de Mon Sep 17 00:00:00 2001
+From: Rafael Palomar <rafael.palomar@rr-research.no>
+Date: Sun, 18 Mar 2018 12:22:22 +0100
+Subject: [PATCH] Fix including Win32 files in non-windows
+
+---
+ CMake/SlicerMacroConfigureModuleCxxTestDriver.cmake | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/CMake/SlicerMacroConfigureModuleCxxTestDriver.cmake b/CMake/SlicerMacroConfigureModuleCxxTestDriver.cmake
+index 13b8b6eee..1394d135f 100644
+--- a/CMake/SlicerMacroConfigureModuleCxxTestDriver.cmake
++++ b/CMake/SlicerMacroConfigureModuleCxxTestDriver.cmake
+@@ -55,7 +55,11 @@ macro(SlicerMacroConfigureModuleCxxTestDriver)
+     set(CMAKE_TESTDRIVER_BEFORE_TESTMAIN "")
+     set(CMAKE_TESTDRIVER_AFTER_TESTMAIN "")
+ 
+-    set(EXTRA_INCLUDE "vtkWin32OutputWindow.h")
++    if(WIN32)
++      set(EXTRA_INCLUDE "vtkWin32OutputWindow.h")
++    else()
++      set(EXTRA_INCLUDE "vtkOutputWindow.h")
++    endif(WIN32)
+ 
+     if(SLICER_TEST_DRIVER_WITH_VTK_ERROR_OUTPUT_CHECK)
+       set(CMAKE_TESTDRIVER_BEFORE_TESTMAIN
+-- 
+2.16.1
+

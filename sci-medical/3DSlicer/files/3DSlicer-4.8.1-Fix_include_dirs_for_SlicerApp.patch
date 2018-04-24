@@ -1,0 +1,55 @@
+From 2494ecf61947568aa8957fc794bc1534b9d92ac5 Mon Sep 17 00:00:00 2001
+From: Rafael Palomar <rafael.palomar@rr-research.no>
+Date: Mon, 19 Mar 2018 10:52:48 +0100
+Subject: [PATCH] Fix include paths for SlicerApp
+
+---
+ Applications/SlicerApp/CMakeLists.txt             | 4 ++++
+ Applications/SlicerApp/Testing/Cpp/CMakeLists.txt | 2 ++
+ 2 files changed, 6 insertions(+)
+
+diff --git a/Applications/SlicerApp/CMakeLists.txt b/Applications/SlicerApp/CMakeLists.txt
+index 6ffa546af..4bfdf0e1a 100755
+--- a/Applications/SlicerApp/CMakeLists.txt
++++ b/Applications/SlicerApp/CMakeLists.txt
+@@ -4,6 +4,8 @@ project(${APPLICATION_NAME}App)
+ 
+ include(SlicerMacroBuildApplication)
+ 
++find_package(QtTesting REQUIRED)
++
+ # --------------------------------------------------------------------------
+ # Slicer supports more than one application (i.e. an application
+ # "OtherApp" in addition to "APPLICATION_NAMEApp").
+@@ -103,6 +105,7 @@ slicerMacroBuildAppLibrary(
+   DESCRIPTION_SUMMARY ${SlicerApp_DESCRIPTION_SUMMARY}
+   DESCRIPTION_FILE ${SlicerApp_DESCRIPTION_FILE}
+   EXPORT_DIRECTIVE "Q_SLICER_APP_EXPORT"
++  INCLUDE_DIRECTORIES ${QtTesting_INCLUDE_DIRS}
+   FOLDER ${${PROJECT_NAME}_FOLDER}
+   SRCS ${APPLIB_SRCS}
+   MOC_SRCS ${APPLIB_MOC_SRCS}
+@@ -127,6 +130,7 @@ set(APP_SRCS
+ slicerMacroBuildApplication(
+   NAME ${PROJECT_NAME}
+   APPLICATION_NAME ${${PROJECT_NAME}_APPLICATION_NAME}
++  INCLUDE_DIRECTORIES ${QtTesting_INCLUDE_DIR}
+   LAUNCHER_SPLASHSCREEN_FILE ${SlicerApp_LAUNCHER_SPLASHSCREEN_FILE}
+   APPLE_ICON_FILE ${SlicerApp_APPLE_ICON_FILE}
+   WIN_ICON_FILE ${SlicerApp_WIN_ICON_FILE}
+diff --git a/Applications/SlicerApp/Testing/Cpp/CMakeLists.txt b/Applications/SlicerApp/Testing/Cpp/CMakeLists.txt
+index 209fe6130..988a48a09 100644
+--- a/Applications/SlicerApp/Testing/Cpp/CMakeLists.txt
++++ b/Applications/SlicerApp/Testing/Cpp/CMakeLists.txt
+@@ -10,6 +10,8 @@ if(Slicer_USE_PYTHONQT_WITH_TCL)
+   endif()
+ endif()
+ 
++include_directories(${QtTesting_INCLUDE_DIRS} ${PYTHONQT_INCLUDE_DIR})
++
+ set(CMAKE_TESTDRIVER_BEFORE_TESTMAIN "DEBUG_LEAKS_ENABLE_EXIT_ERROR();" )
+ set(KIT_TEST_SRCS
+   qSlicerAppAboutDialogTest1.cxx
+-- 
+2.16.1
+

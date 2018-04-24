@@ -1,0 +1,67 @@
+From 30059976d4f4014178c5ef30bb13a22c0fa044df Mon Sep 17 00:00:00 2001
+From: Rafael Palomar <rafael.palomar@rr-research.no>
+Date: Sun, 18 Mar 2018 11:24:34 +0100
+Subject: [PATCH] Fix PythonQt includes
+
+---
+ Base/QTCore/Testing/Cxx/CMakeLists.txt  | 4 ++++
+ Modules/Core/Testing/CMakeLists.txt     | 4 ++++
+ Modules/Loadable/Cameras/CMakeLists.txt | 6 +++++-
+ 3 files changed, 13 insertions(+), 1 deletion(-)
+
+diff --git a/Base/QTCore/Testing/Cxx/CMakeLists.txt b/Base/QTCore/Testing/Cxx/CMakeLists.txt
+index 77ed710f8..13baf2ab3 100644
+--- a/Base/QTCore/Testing/Cxx/CMakeLists.txt
++++ b/Base/QTCore/Testing/Cxx/CMakeLists.txt
+@@ -1,6 +1,10 @@
+ 
+ if(BUILD_TESTING)
+ 
++  if(Slicer_USE_PYTHONQT)
++    find_package(PythonQt REQUIRED)
++  endif(Slicer_USE_PYTHONQT)
++  
+   # Code specfic to Slicer testing is added here.
+   set(KIT ${PROJECT_NAME})
+   set(CMAKE_TESTDRIVER_BEFORE_TESTMAIN "DEBUG_LEAKS_ENABLE_EXIT_ERROR();" )
+diff --git a/Modules/Core/Testing/CMakeLists.txt b/Modules/Core/Testing/CMakeLists.txt
+index d51c314fd..281dd077d 100644
+--- a/Modules/Core/Testing/CMakeLists.txt
++++ b/Modules/Core/Testing/CMakeLists.txt
+@@ -1,5 +1,9 @@
+ set(KIT ${PROJECT_NAME})
+ 
++
++find_package(PythonQt REQUIRED)
++include_directories(${PYTHON_INCLUDE_DIRS} ${PYTHONQT_INCLUDE_DIR})
++
+ set(KIT_TEST_SRCS)
+ set(KIT_TEST_NAMES)
+ set(KIT_TEST_NAMES_CXX)
+diff --git a/Modules/Loadable/Cameras/CMakeLists.txt b/Modules/Loadable/Cameras/CMakeLists.txt
+index f877439b9..27c855515 100644
+--- a/Modules/Loadable/Cameras/CMakeLists.txt
++++ b/Modules/Loadable/Cameras/CMakeLists.txt
+@@ -8,6 +8,10 @@ string(TOUPPER ${MODULE_NAME} MODULE_NAME_UPPER)
+ #-----------------------------------------------------------------------------
+ add_subdirectory(Logic)
+ 
++#-----------------------------------------------------------------------------
++
++find_package(PythonQt REQUIRED)
++
+ #-----------------------------------------------------------------------------
+ set(MODULE_EXPORT_DIRECTIVE "Q_SLICER_QTMODULES_${MODULE_NAME_UPPER}_EXPORT")
+ 
+@@ -45,7 +49,7 @@ slicerMacroBuildLoadableModule(
+   NAME ${MODULE_NAME}
+   TITLE ${MODULE_TITLE}
+   EXPORT_DIRECTIVE ${MODULE_EXPORT_DIRECTIVE}
+-  INCLUDE_DIRECTORIES ${MODULE_INCLUDE_DIRECTORIES}
++  INCLUDE_DIRECTORIES ${MODULE_INCLUDE_DIRECTORIES} ${PYTHONQT_INCLUDE_DIR}
+   SRCS ${MODULE_SRCS}
+   MOC_SRCS ${MODULE_MOC_SRCS}
+   UI_SRCS ${MODULE_UI_SRCS}
+-- 
+2.16.1
+

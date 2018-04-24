@@ -1,0 +1,25 @@
+From 686312d21dee63cd877357bfe6a1096ab237e17b Mon Sep 17 00:00:00 2001
+From: Rafael Palomar <rafael.palomar@rr-research.no>
+Date: Fri, 20 Apr 2018 16:45:08 +0200
+Subject: [PATCH] Do not install DCMTK
+
+---
+ CMake/SlicerCPack.cmake | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMake/SlicerCPack.cmake b/CMake/SlicerCPack.cmake
+index 2f8680adc..0bd5b4284 100644
+--- a/CMake/SlicerCPack.cmake
++++ b/CMake/SlicerCPack.cmake
+@@ -59,7 +59,7 @@ if(NOT Slicer_USE_SYSTEM_QT)
+   include(${Slicer_CMAKE_DIR}/SlicerBlockInstallQtPlugins.cmake)
+ endif()
+ 
+-if(Slicer_BUILD_DICOM_SUPPORT AND NOT Slicer_USE_SYSTEM_DCMTK)
++if(Slicer_SUPERBUILD AND Slicer_BUILD_DICOM_SUPPORT AND NOT Slicer_USE_SYSTEM_DCMTK)
+   include(${Slicer_CMAKE_DIR}/SlicerBlockInstallDCMTKApps.cmake)
+ endif()
+ 
+-- 
+2.16.1
+

@@ -1,0 +1,26 @@
+From 26cfe0cd2107a3cde219fcc724f9c169d9a54148 Mon Sep 17 00:00:00 2001
+From: Rafael Palomar <rafael.palomar@rr-research.no>
+Date: Fri, 13 Apr 2018 05:43:16 +0200
+Subject: [PATCH] Fix configuring error related to python when superbuild is
+ off
+
+---
+ CMake/SlicerCPack.cmake | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMake/SlicerCPack.cmake b/CMake/SlicerCPack.cmake
+index 3fe47d5a8..2f8680adc 100644
+--- a/CMake/SlicerCPack.cmake
++++ b/CMake/SlicerCPack.cmake
+@@ -19,7 +19,7 @@ elseif(WIN32)
+ endif()
+ 
+ # -------------------------------------------------------------------------
+-if(Slicer_USE_PYTHONQT AND NOT Slicer_USE_SYSTEM_python)
++if(Slicer_SUPERBUILD AND Slicer_USE_PYTHONQT AND NOT Slicer_USE_SYSTEM_python)
+   # Python install rules are common to both 'bundled' and 'regular' package
+   include(${Slicer_CMAKE_DIR}/SlicerBlockInstallPython.cmake)
+ endif()
+-- 
+2.16.1
+

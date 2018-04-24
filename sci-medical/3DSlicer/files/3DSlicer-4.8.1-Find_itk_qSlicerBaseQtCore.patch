@@ -1,0 +1,51 @@
+From d08ee907b862da31022e8fd18039cf1dcb3831f8 Mon Sep 17 00:00:00 2001
+From: Rafael Palomar <rafael.palomar@rr-research.no>
+Date: Sat, 17 Mar 2018 19:16:25 +0100
+Subject: [PATCH] Fix find ITK for qSlicerBaseQtCore
+
+---
+ Base/QTCore/CMakeLists.txt | 26 +++++++++++++-------------
+ 1 file changed, 13 insertions(+), 13 deletions(-)
+
+diff --git a/Base/QTCore/CMakeLists.txt b/Base/QTCore/CMakeLists.txt
+index 7681599c5..6a19cd133 100644
+--- a/Base/QTCore/CMakeLists.txt
++++ b/Base/QTCore/CMakeLists.txt
+@@ -16,21 +16,21 @@ endif()
+ #
+ if(Slicer_BUILD_CLI_SUPPORT)
+   find_package(SlicerExecutionModel REQUIRED ModuleDescriptionParser)
+-
+-  #
+-  # ITK
+-  #
+-  set(${PROJECT_NAME}_ITK_COMPONENTS
+-    # Import ITK targets required by ModuleDescriptionParser
+-    ${ModuleDescriptionParser_ITK_COMPONENTS}
+-    # Import ITK targets required by CTKImageProcessingITKCore
+-    ITKCommon
+-    )
+-  find_package(ITK 4.6 COMPONENTS ${${PROJECT_NAME}_ITK_COMPONENTS} REQUIRED)
+-  set(ITK_NO_IO_FACTORY_REGISTER_MANAGER 1) # See Libs/ITKFactoryRegistration/CMakeLists.txt
+-  include(${ITK_USE_FILE})
+ endif()
+ 
++#
++# ITK
++#
++set(${PROJECT_NAME}_ITK_COMPONENTS
++  # Import ITK targets required by ModuleDescriptionParser
++  ${ModuleDescriptionParser_ITK_COMPONENTS}
++  # Import ITK targets required by CTKImageProcessingITKCore
++  ITKCommon
++  )
++find_package(ITK COMPONENTS ${${PROJECT_NAME}_ITK_COMPONENTS} REQUIRED)
++set(ITK_NO_IO_FACTORY_REGISTER_MANAGER 1) # See Libs/ITKFactoryRegistration/CMakeLists.txt
++include(${ITK_USE_FILE})
++
+ #
+ # qRestAPI
+ #
+-- 
+2.16.1
+

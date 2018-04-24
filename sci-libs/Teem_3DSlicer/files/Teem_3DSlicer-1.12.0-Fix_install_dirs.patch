@@ -1,0 +1,50 @@
+From 0c65448433c898826d44fa38d58d3a3865c30c9d Mon Sep 17 00:00:00 2001
+From: Rafael Palomar <rafael.palomar@rr-research.no>
+Date: Tue, 27 Feb 2018 10:49:14 +0100
+Subject: [PATCH] Mod
+
+---
+ CMakeLists.txt | 13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 8185cc90..377af9d4 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -403,6 +403,8 @@ add_library(teem ${Teem_SOURCES})
+ # RPATH stuff, and mac will ingore the INSTALL_RPATH.  Make sure for
+ # macs to set BUILD_WITH_INSTALL_RPATH OFF and set INSTALL_NAME_DIR.
+ # I belive INSTALL_NAME_DIR will be ignored on linux.
++
++if(NOT TEEM_LIB_INSTALL_DIR)
+ set_target_properties(teem PROPERTIES
+   BUILD_WITH_INSTALL_RPATH OFF
+   INSTALL_RPATH ${CMAKE_INSTALL_PREFIX}/lib
+@@ -410,6 +412,15 @@ set_target_properties(teem PROPERTIES
+   SOVERSION 1
+   VERSION ${Teem_VERSION_STRING}
+   )
++else()
++set_target_properties(teem PROPERTIES
++  BUILD_WITH_INSTALL_RPATH OFF
++  INSTALL_RPATH ${TEEM_LIB_INSTALL_DIR}
++  INSTALL_NAME_DIR ${TEEM_LIB_INSTALL_DIR}
++  SOVERSION 1
++  VERSION ${Teem_VERSION_STRING}
++  )
++endif()
+ 
+ if(Teem_BZIP2_LIB)
+   target_link_libraries(teem ${Teem_BZIP2_LIB})
+@@ -486,7 +497,7 @@ file(WRITE ${Teem_BINARY_DIR}/TeemBuildSettings.cmake "# This file should NOT be
+ # It is currently provided so that backwards compatibility with external projects
+ # can be preserved.  External packages that include TeemBuildSettings.cmake should
+ # stop using this feature.
+-# 
++#
+ # CMake Error at cmake/Modules/CMakeExportBuildSettings.cmake:17 (message):
+ # The functionality of the CMakeExportBuildSettings module has been dropped as of CMake 2.8.  It was
+ # deemed harmful (confusing users by changing their compiler).  Please remove
+-- 
+2.16.1
+

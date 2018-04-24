@@ -1,0 +1,32 @@
+From a81c5c93709cc24d135f3148004a6e03e9ceefb0 Mon Sep 17 00:00:00 2001
+From: Rafael Palomar <rafael.palomar@rr-research.no>
+Date: Sat, 17 Mar 2018 21:42:49 +0100
+Subject: [PATCH] Fix including QtTesting for Slicer/Base/QTGUI
+
+---
+ Base/QTGUI/CMakeLists.txt | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/Base/QTGUI/CMakeLists.txt b/Base/QTGUI/CMakeLists.txt
+index 478e8f9e3..66c16b3cd 100644
+--- a/Base/QTGUI/CMakeLists.txt
++++ b/Base/QTGUI/CMakeLists.txt
+@@ -1,5 +1,7 @@
+ project(qSlicerBaseQTGUI)
+ 
++find_package(QtTesting REQUIRED)
++
+ #
+ # See CMake/SlicerMacroBuildBaseQtLibrary.cmake for details
+ #
+@@ -12,6 +14,7 @@ set(KIT_include_directories
+   ${MRMLDisplayableManager_INCLUDE_DIRS}
+   ${qSlicerBaseQTCore_SOURCE_DIR}
+   ${qSlicerBaseQTCore_BINARY_DIR}
++  ${QtTesting_INCLUDE_DIRS}
+   )
+ 
+ # Source files
+-- 
+2.16.1
+

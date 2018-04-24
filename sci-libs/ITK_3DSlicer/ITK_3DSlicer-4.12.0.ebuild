@@ -1,0 +1,66 @@
+# Copyright 1999-2018 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+
+EAPI=6
+
+PYTHON_COMPAT=( python2_7 )
+
+inherit cmake-utils multilib
+
+DESCRIPTION="The Image Segmentation and Registration Toolkit"
+
+HOMEPAGE="https://www.itk.org"
+
+SRC_URI="https://github.com/Slicer/ITK/archive/9ab5fb62184e1e41982c1eef6932983c6e62940a.zip -> ${P}.zip"
+
+LICENSE="BSD LGPL-2"
+
+KEYWORDS="~amd64"
+
+SLOT="0"
+
+DEPEND="
+	sci-medical/DCMTK_CTK
+	sci-libs/VTK_3DSlicer
+	sci-libs/hdf5
+"
+
+RDEPEND="${DEPEND}"
+
+src_unpack() {
+
+	default
+
+	mv ${WORKDIR}/ITK-* ${WORKDIR}/${P} || die
+}
+
+src_configure() {
+
+	local mycmakeargs=()
+
+	# General building options
+	mycmakeargs+=(
+		-DBUILD_TESTING=OFF
+		-DITK_INSTALL_LIBRARY_DIR=$(get_libdir)
+		-DBUILD_SHARED_LIBS=ON
+		-DCMAKE_CXX_FLAGS="-std=gnu++11"
+	)
+
+	# ITK building options
+	mycmakeargs+=(
+		-DITK_USE_SYSTEM_DCMTK=ON
+		-DITK_USE_SYSTEM_HDF5=ON
+	)
+
+	# ITK Modules
+	mycmakeargs+=(
+		-DModule_ITKDCMTK=ON
+		-DModule_ITKIODCMTK=ON
+		-DModule_ITKIOMINC=ON
+		-DModule_ITKVTKGlue=ON
+		-DModule_MGHIO=ON
+		-DModule_ITKVtkGlue=ON
+	)
+
+	cmake-utils_src_configure
+}
