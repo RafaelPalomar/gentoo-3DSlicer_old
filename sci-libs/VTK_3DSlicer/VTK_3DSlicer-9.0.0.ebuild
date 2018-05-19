@@ -7,9 +7,6 @@ PYTHON_COMPAT=( python2_7 )
 
 inherit cmake-utils
 
-# Short package version
-SPV="$(get_version_component_range 1-2)"
-
 DESCRIPTION="The Visualization Toolkit"
 HOMEPAGE="https://www.vtk.org/"
 
