@@ -89,6 +89,8 @@ src_configure(){
 		-DSlicer_BUILD_CLI_SUPPORT=OFF
 		-DSlicer_BUILD_EXTENSIONMANAGER_SUPPORT=OFF
 		-DjqPlot_DIR=/usr/share/jqPlot
+		-DSlicer_INSTALL_DEVELOPMENT=ON
+		-DSlicer_USE_PYTHONQT=OFF
 	)
 
 	cmake-utils_src_configure
