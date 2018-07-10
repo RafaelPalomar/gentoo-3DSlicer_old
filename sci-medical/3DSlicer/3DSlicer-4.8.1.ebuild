@@ -1,5 +1,5 @@
 # Copyright 1999-2018 Gentoo Foundation
-# Distributed under the terms of the GNU General Public License v2
+1;4804;0c# Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
@@ -91,6 +91,7 @@ src_configure(){
 		-DjqPlot_DIR=/usr/share/jqPlot
 		-DSlicer_INSTALL_DEVELOPMENT=ON
 		-DSlicer_USE_PYTHONQT=OFF
+		-DSlicer_USE_QtTesting=OFF
 	)
 
 	cmake-utils_src_configure
