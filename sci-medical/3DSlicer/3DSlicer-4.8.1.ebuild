@@ -1,5 +1,5 @@
 # Copyright 1999-2018 Gentoo Foundation
-1;4804;0c# Distributed under the terms of the GNU General Public License v2
+# Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
@@ -92,6 +92,7 @@ src_configure(){
 		-DSlicer_INSTALL_DEVELOPMENT=ON
 		-DSlicer_USE_PYTHONQT=OFF
 		-DSlicer_USE_QtTesting=OFF
+		-DSlicer_USE_CTKAPPLAUNCHER=OFF
 	)
 
 	cmake-utils_src_configure
