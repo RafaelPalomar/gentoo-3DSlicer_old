@@ -58,6 +58,7 @@ PATCHES=(
 	"${FILESDIR}"/${P}-Fix_slicer_configuration_python.patch
 	"${FILESDIR}"/${P}-Fix_no_install_DCMTK.patch
 	"${FILESDIR}"/${P}-Remove_CPack_from_LastConfigureStep.patch
+	"${FILESDIR}"/${P}-Add_rpath_to_slicer_app.patch
 )
 
 
